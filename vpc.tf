@@ -191,18 +191,18 @@ resource "aws_internet_gateway" "igw" {
 
 
 
-# Uses an existing VPC, filtered by vpc_name in variables.tf
-data "aws_vpc" "selected_vpc" {
-  filter {
-    name   = "tag:Name"
-    values = [var.vpc_name]
-  }
-}
+# # Uses an existing VPC, filtered by vpc_name in variables.tf
+# data "aws_vpc" "selected_vpc" {
+#   filter {
+#     name   = "tag:Name"
+#     values = [var.vpc_name]
+#   }
+# }
 
-# Uses an existing subnet on aws console, filtered by subnet_name in variables.tf
-data "aws_subnet" "selected_subnet" {
-  filter {
-    name   = "tag:Name"
-    values = [var.public_subnet_name1]
-  }
-}
+# # Uses an existing subnet on aws console, filtered by subnet_name in variables.tf
+# data "aws_subnet" "selected_subnet" {
+#   filter {
+#     name   = "tag:Name"
+#     values = [var.public_subnet_name1]
+#   }
+# }
