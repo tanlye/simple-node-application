@@ -45,3 +45,24 @@ jobs:
 
    - name: Run TFLint
      run: tflint -f compact
+
+ Terrascan-IAC:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+  
+    - name: Run Terrascan
+      id: terrascan
+      uses: tenable/terrascan-action@main
+      with:
+        iac_type: 'terraform'
+        iac_version: 'v14'
+        policy_type: 'all'
+        only_warn: true
+        sarif_upload: true
+      
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: terrascan.sarif
