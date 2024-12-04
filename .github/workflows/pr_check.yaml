@@ -52,17 +52,33 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
   
-    - name: Run Terrascan
+    - name: Run Terrascan for Terraform
       id: terrascan
       uses: tenable/terrascan-action@main
       with:
-        iac_type: 'docker,k8s,terraform'
+        iac_type: 'terraform'
         iac_version: 'v14'
-        policy_type: 'all'
+        policy_type: 'aws'
         only_warn: true
         sarif_upload: true
+
+    - name: Run Terrascan for Kubernetes
+      uses: tenable/terrascan-action@main
+      with:
+        iac_type: 'k8s'
+        policy_type: 'aws'
+        only_warn: true
+        sarif_upload: true  
+
+    - name: Run Terrascan for Docker
+      uses: tenable/terrascan-action@main
+      with:
+        iac_type: 'docker'
+        policy_type: 'aws'
+        only_warn: true
+        sarif_upload: true  
       
     - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: terrascan.sarif
