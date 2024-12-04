@@ -56,13 +56,13 @@ jobs:
       id: terrascan
       uses: tenable/terrascan-action@main
       with:
-        iac_type: 'terraform'
+        iac_type: 'docker,k8s,terraform'
         iac_version: 'v14'
         policy_type: 'all'
         only_warn: true
         sarif_upload: true
       
     - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: terrascan.sarif
